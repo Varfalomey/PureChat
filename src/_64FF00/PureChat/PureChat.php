@@ -465,8 +465,13 @@ class PureChat extends PluginBase
 
         if($this->factionsAPI !== null)
         {
-            $string = str_replace("{fac_name}", $this->factionsAPI->getPlayerFaction($player), $string);
-            $string = str_replace("{fac_rank}", $this->factionsAPI->getPlayerRank($player), $string);
+	    	if(this->factionsAPI->isInFaction($player->getName()))
+                $string = str_replace("{fac_name}", $this->factionsAPI->getPlayerFaction($player), $string);
+                $string = str_replace("{fac_rank}", $this->factionsAPI->getPlayerRank($player), $string);
+            } else {
+                $string = str_replace("{fac_name}", '', $string);
+                $string = str_replace("{fac_rank}", '', $string);
+            }
         }
         else
         {
